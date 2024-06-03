@@ -11,8 +11,6 @@ ctk.set_appearance_mode('Light')
 
 
 class Button_Constructor(ctk.CTkButton):
-    """Создает кнопку, при наджатии команда передается 
-    в контроллер или исполняется сразу """
     def __init__(self, command, *args, **kwargs):
         if callable(command) or type(command) is None:
             super().__init__(command=command, *args, **kwargs)
@@ -58,18 +56,11 @@ class About_programm_window(ctk.CTk):
         self.title('О программе')
         header = ctk.CTkLabel(self, anchor=ctk.CENTER, font=ctk.CTkFont('Calibri', size=30, weight='bold'), text='О программе')
         main_label = ctk.CTkLabel(self, justify=ctk.LEFT, font=ctk.CTkFont('Calibri', size=24), text='''
-        Программа создана в рамках индивидуального проекта: 
-        «Кубические уравнения и мнимые числа, история открытия решения,
-        применение в реальной жизни»
+        '''
+        This program was created for colledge project:
+        Cube equations, history of discovery and real life application
 
-        Уфимский колледж радиоэлектронки, телекоммуникации и безопасности
-        Студент: Шайдулин Арслан 
-        Группа: 9ИСП-11-22
-        Преподаватель по математике: Идрисова Гульчачак Равиловна
-        Преподаватель по информатике: Павленко Наталья Сергеевна
-
-        Программа написана на языке Python
-        Использованные модули:
+        Program was created on Python with next modules:
         customtkinter
         re
         matplotlib
@@ -98,28 +89,28 @@ class Settings_window(ctk.CTk):
     def __init__(self):
         super().__init__()
         self.__set_sizes()
-        self.title("Настройки")
-        ctk.CTkLabel(self, text="Настройки\nДиапазон графика\nМин: -150; Макс: 150", font=ctk.CTkFont('Calibri', size=28)).grid(row=0, column=0, columnspan=4)
-        ctk.CTkLabel(self, text='x мин:', font=ctk.CTkFont('Calibri', size=24)).grid(row=1, column=0) # Размещение
-        ctk.CTkLabel(master=self, text='x макс:', font=ctk.CTkFont('Calibri', size=24)).grid(row=1, column=2)
+        self.title("Settings")
+        ctk.CTkLabel(self, text="Settings\nRange of graphic\nMin: -150; Max: 150", font=ctk.CTkFont('Calibri', size=28)).grid(row=0, column=0, columnspan=4)
+        ctk.CTkLabel(self, text='x min:', font=ctk.CTkFont('Calibri', size=24)).grid(row=1, column=0) 
+        ctk.CTkLabel(master=self, text='x max:', font=ctk.CTkFont('Calibri', size=24)).grid(row=1, column=2)
 
         x_min = ctk.CTkEntry(self, font=ctk.CTkFont('Calibri', size=26))
         x_min.insert(0, '-5.0')
-        x_min.grid(row=1, column=1, sticky='nswe') # Размещение
+        x_min.grid(row=1, column=1, sticky='nswe')
 
-        x_max = ctk.CTkEntry(self, font=ctk.CTkFont('Calibri', size=26)) # Создание поля ввода для х макс
+        x_max = ctk.CTkEntry(self, font=ctk.CTkFont('Calibri', size=26)) 
         x_max.insert(0, '5.0')
-        x_max.grid(row=1, column=3, sticky='nswe') # Размещение
+        x_max.grid(row=1, column=3, sticky='nswe') 
 
-        Button_Constructor(master=self, text='Принять', command='set_settings',
+        Button_Constructor(master=self, text='Accept', command='set_settings',
                            font=ctk.CTkFont(family='Calibri', size=22)).grid(row=2, column=0, columnspan=3, sticky='nswe', pady=20)
 
         x_min_controller = Ctrl.Input_controller('x_min', x_min)
         x_max_controller = Ctrl.Input_controller('x_max', x_max)
 
-        ctk.CTkButton(self, text='Выход', command=self.destroy, font=ctk.CTkFont(family='Calibri', size=22)).grid(row=2, column=3, sticky='nswe', pady=20)
+        ctk.CTkButton(self, text='Exit', command=self.destroy, font=ctk.CTkFont(family='Calibri', size=22)).grid(row=2, column=3, sticky='nswe', pady=20)
 
-        example_1 = "Примеры\nx^3+2x^2+3x+6;\n"
+        example_1 = "Examples\nx^3+2x^2+3x+6;\n"
         example_2 = "x^3-4x^2-16x+64;\n"
         example_3 = "8x^4+x^3+64x+8;\n"
         examples = [example_1, example_2, example_3]
@@ -145,43 +136,43 @@ class App(ctk.CTk):
     def __init__(self: ctk.CTk):
         super().__init__()
         self.__set_sizes()
-        self.title("График и рcшение уравнений")
+        self.title("Graphic builder and equation solver")
         
-        Button_Constructor(master=self, text='Настройки', 
+        Button_Constructor(master=self, text='Settings', 
                           command=self.show_settings_win, 
                           font=ctk.CTkFont(family='Calibri', size=22)).grid(row=1, column=2, sticky='nswe')
         
-        Button_Constructor(master=self, text='График уравнения',   
+        Button_Constructor(master=self, text='equation graphic',   
                            command='show_equation_graph', 
                            font=ctk.CTkFont(family='Calibri', size=22)).grid(row=2, column=2,  sticky='nswe', padx=1, pady=2)
         
-        Button_Constructor(master=self, text='График производной', 
+        Button_Constructor(master=self, text='derivation graphic', 
                            command='show_deriv_graph', 
                            font=ctk.CTkFont(family='Calibri', size=22)).grid(row=3, column=2,  sticky='nswe', padx=1, pady=2)
         
-        Button_Constructor(master=self, text='Решить уравнение',   
+        Button_Constructor(master=self, text='Solve',   
                            command='solve_equation', 
                            font=ctk.CTkFont(family='Calibri', size=22)).grid(row=4, column=2, sticky='nswe', padx=1, pady=2)
         
-        Button_Constructor(master=self, text='Производная',        
+        Button_Constructor(master=self, text='Derivation',        
                            command='derivation', 
                            font=ctk.CTkFont(family='Calibri', size=22)).grid(row=5, column=2, sticky='nswe', padx=1, pady=2)
         
-        Button_Constructor(master=self, text='О программе',        
+        Button_Constructor(master=self, text='About',        
                            command=self.show_about_program_window, 
                            font=ctk.CTkFont(family='Calibri', size=22)).grid(row=6, column=0, sticky='nswe', padx=1, pady=2)
         
-        Button_Constructor(master=self, text='Очистить',
+        Button_Constructor(master=self, text='Clear',
                            command='clear_all', 
                            font=ctk.CTkFont(family='Calibri', size=22)).grid(row=6, column=1, sticky='nswe', padx=2, pady=2)
         
-        ctk.CTkButton(master=self, text='Выход', 
+        ctk.CTkButton(master=self, text='Exit', 
                       command=self.quit,
                       font=ctk.CTkFont(family='Calibri', size=22)).grid(row=6, column=2, sticky='nswe', pady=2)
 
-        ctk.CTkLabel(master=self, text='Уравнение:', font=ctk.CTkFont(family='Calibri', size=26)).grid(row=2, column=0)
-        ctk.CTkLabel(master=self, text='Производная:', font=ctk.CTkFont(family='Calibri', size=26)).grid(row=3, column=0)
-        ctk.CTkLabel(master=self, text='Корни\nуравнения:',font=ctk.CTkFont(family='Calibri', size=26)).grid(row=4, column=0, rowspan=2, sticky='nswe')
+        ctk.CTkLabel(master=self, text='Equation:', font=ctk.CTkFont(family='Calibri', size=26)).grid(row=2, column=0)
+        ctk.CTkLabel(master=self, text='Derivation:', font=ctk.CTkFont(family='Calibri', size=26)).grid(row=3, column=0)
+        ctk.CTkLabel(master=self, text='root of\nequation:',font=ctk.CTkFont(family='Calibri', size=26)).grid(row=4, column=0, rowspan=2, sticky='nswe')
         
         self.deriv_output_frame = ctk.CTkFrame(master=self)
         self.deriv_output_frame.columnconfigure(0, minsize=391)
@@ -225,7 +216,6 @@ class App(ctk.CTk):
         for i in range(len(self.columns)): self.columnconfigure(i, minsize=self.columns[i], weight=0)
     
     def set_graphic_window(self, column:int, row:int, rowspan:int=1, columnspan:int=1):
-        """Создает окно графика в заданном окне на заданном месте"""
         self.graph_win = Graphic_Window_Constructor(self, column, row, rowspan, columnspan)
         self.graph_win.build_matplotlib_figure()
         output_controller = Ctrl.Output_Controller(solution_output=self.output, derivation_output=self.deriv_output, graph_output=self.graph_win)
